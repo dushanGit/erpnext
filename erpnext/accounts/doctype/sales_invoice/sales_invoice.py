@@ -537,6 +537,7 @@ class SalesInvoice(SellingController):
 
 		self.process_common_party_accounting()
 
+<<<<<<< HEAD
 	def validate_pos_return(self):
 		if self.is_consolidated:
 			# pos return is already validated in pos invoice
@@ -569,6 +570,12 @@ class SalesInvoice(SellingController):
 					get_link_to_form("POS Closing Entry", pos_closing_entry[0]),
 				)
 				frappe.throw(msg, title=_("Not Allowed"))
+=======
+		if self.is_return:
+			if self.return_against:
+				frappe.get_doc(self.doctype, self.return_against).set_status(update=True)
+			self.refresh_subscription_status()
+>>>>>>> 8e8a717 (fix(accounts): refresh invoice status after returns)
 
 	def before_cancel(self):
 		self.check_if_consolidated_invoice()
@@ -640,6 +647,24 @@ class SalesInvoice(SellingController):
 
 		self.delete_auto_created_batches()
 
+<<<<<<< HEAD
+=======
+		if (
+			self.doctype == "Sales Invoice"
+			and self.is_pos
+			and self.is_return
+			and self.is_created_using_pos
+			and not self.pos_closing_entry
+		):
+			POSService(self).cancel_pos_invoice_credit_note_generated_during_sales_invoice_mode()
+
+		self.update_billed_qty_in_scio()
+		if self.is_return and self.return_against:
+			frappe.get_doc(self.doctype, self.return_against).set_status(update=True)
+
+		self.refresh_subscription_status()
+
+>>>>>>> 8e8a717 (fix(accounts): refresh invoice status after returns)
 	def update_status_updater_args(self):
 		if cint(self.update_stock):
 			self.status_updater.append(
