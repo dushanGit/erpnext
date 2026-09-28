@@ -27,6 +27,10 @@ frappe.listview_settings["Sales Invoice"] = {
 			"Partly Paid": "yellow",
 			"Internal Transfer": "darkgrey",
 		};
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8e8a717 (fix(accounts): refresh invoice status after returns)
 		return [__(doc.status), status_colors[doc.status], "status,=," + doc.status];
 	},
 	right_column: "grand_total",

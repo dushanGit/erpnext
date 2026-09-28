@@ -565,6 +565,7 @@ class SalesInvoice(SellingController):
 		self.process_common_party_accounting()
 		self.update_billed_qty_in_scio()
 
+<<<<<<< HEAD
 	def validate_pos_return(self):
 		if self.is_consolidated:
 			# pos return is already validated in pos invoice
@@ -610,6 +611,12 @@ class SalesInvoice(SellingController):
 					),
 					title=_("Not Allowed"),
 				)
+=======
+		if self.is_return:
+			if self.return_against:
+				frappe.get_doc(self.doctype, self.return_against).set_status(update=True)
+			self.refresh_subscription_status()
+>>>>>>> 8e8a717 (fix(accounts): refresh invoice status after returns)
 
 	def before_cancel(self):
 		# check if generated via POS and already included in POS Closing Entry
@@ -700,6 +707,13 @@ class SalesInvoice(SellingController):
 			self.cancel_pos_invoice_credit_note_generated_during_sales_invoice_mode()
 
 		self.update_billed_qty_in_scio()
+<<<<<<< HEAD
+=======
+		if self.is_return and self.return_against:
+			frappe.get_doc(self.doctype, self.return_against).set_status(update=True)
+
+		self.refresh_subscription_status()
+>>>>>>> 8e8a717 (fix(accounts): refresh invoice status after returns)
 
 	def update_status_updater_args(self):
 		if not cint(self.update_stock):

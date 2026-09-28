@@ -896,6 +896,14 @@ class PurchaseInvoice(BuyingController):
 
 		self.process_common_party_accounting()
 
+<<<<<<< HEAD
+=======
+		if self.is_return:
+			if self.return_against:
+				frappe.get_doc(self.doctype, self.return_against).set_status(update=True)
+			self.refresh_subscription_status()
+
+>>>>>>> 8e8a717 (fix(accounts): refresh invoice status after returns)
 	def on_update_after_submit(self):
 		fields_to_check = [
 			"cash_bank_account",
@@ -1908,6 +1916,14 @@ class PurchaseInvoice(BuyingController):
 			"Tax Withholding Entry",
 		)
 
+<<<<<<< HEAD
+=======
+		if self.is_return and self.return_against:
+			frappe.get_doc(self.doctype, self.return_against).set_status(update=True)
+
+		self.refresh_subscription_status()
+
+>>>>>>> 8e8a717 (fix(accounts): refresh invoice status after returns)
 	def update_project(self):
 		update_purchase_cost({d.project for d in self.items if d.project})
 
