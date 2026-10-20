@@ -242,10 +242,10 @@ class TestItem(FrappeTestCase):
 					"tax_category": data["tax_category"],
 					"company": "_Test Company",
 					"price_list": "_Test Price List",
-					"currency": "_Test Currency",
+					"currency": "INR",
 					"doctype": "Sales Order",
 					"conversion_rate": 1,
-					"price_list_currency": "_Test Currency",
+					"price_list_currency": "INR",
 					"plc_conversion_rate": 1,
 					"order_type": "Sales",
 					"customer": "_Test Customer",
@@ -286,6 +286,7 @@ class TestItem(FrappeTestCase):
 			"cost_center": "_Test Cost Center 2 - _TC",  # from item group
 		}
 		sales_item_details = get_item_details(
+<<<<<<< HEAD
 			{
 				"item_code": "Test Item With Defaults",
 				"company": "_Test Company",
@@ -297,6 +298,21 @@ class TestItem(FrappeTestCase):
 				"plc_conversion_rate": 1,
 				"customer": "_Test Customer",
 			}
+=======
+			frappe._dict(
+				{
+					"item_code": "Test Item With Defaults",
+					"company": "_Test Company",
+					"price_list": "_Test Price List",
+					"currency": "INR",
+					"doctype": "Sales Invoice",
+					"conversion_rate": 1,
+					"price_list_currency": "INR",
+					"plc_conversion_rate": 1,
+					"customer": "_Test Customer",
+				}
+			)
+>>>>>>> 0643130 (test(accounts): cover exchange provider access and cache isolation)
 		)
 		for key, value in sales_item_check.items():
 			self.assertEqual(value, sales_item_details.get(key))
@@ -309,6 +325,7 @@ class TestItem(FrappeTestCase):
 			"cost_center": "_Test Write Off Cost Center - _TC",  # from item
 		}
 		purchase_item_details = get_item_details(
+<<<<<<< HEAD
 			{
 				"item_code": "Test Item With Defaults",
 				"company": "_Test Company",
@@ -320,6 +337,21 @@ class TestItem(FrappeTestCase):
 				"plc_conversion_rate": 1,
 				"supplier": "_Test Supplier",
 			}
+=======
+			frappe._dict(
+				{
+					"item_code": "Test Item With Defaults",
+					"company": "_Test Company",
+					"price_list": "_Test Price List",
+					"currency": "INR",
+					"doctype": "Purchase Invoice",
+					"conversion_rate": 1,
+					"price_list_currency": "INR",
+					"plc_conversion_rate": 1,
+					"supplier": "_Test Supplier",
+				}
+			)
+>>>>>>> 0643130 (test(accounts): cover exchange provider access and cache isolation)
 		)
 		for key, value in purchase_item_check.items():
 			self.assertEqual(value, purchase_item_details.get(key))
