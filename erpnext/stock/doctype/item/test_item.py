@@ -305,6 +305,34 @@ class TestItem(ERPNextTestSuite):
 				json.loads(details.item_tax_rate), expected_item_tax_map[details.item_tax_template]
 			)
 
+<<<<<<< HEAD
+=======
+		data = expected_item_tax_template[-2]
+		details = get_item_details(
+			frappe._dict(
+				{
+					"item_code": data["item_code"],
+					"tax_category": data["tax_category"],
+					"company": "_Test Company",
+					"price_list": "_Test Price List",
+					"currency": "INR",
+					"doctype": "Sales Order",
+					"conversion_rate": 1,
+					"price_list_currency": "INR",
+					"plc_conversion_rate": 1,
+					"order_type": "Sales",
+					"customer": "_Test Customer",
+					"conversion_factor": 1,
+					"price_list_uom_dependant": 1,
+					"ignore_pricing_rule": 1,
+				}
+			)
+		)
+
+		self.assertEqual(details.item_tax_template, data["item_tax_template"])
+		self.assertEqual(json.loads(details.item_tax_rate), expected_item_tax_map[details.item_tax_template])
+
+>>>>>>> 0643130 (test(accounts): cover exchange provider access and cache isolation)
 	def test_item_defaults(self):
 		frappe.delete_doc_if_exists("Item", "Test Item With Defaults", force=1)
 		make_item(
@@ -337,10 +365,10 @@ class TestItem(ERPNextTestSuite):
 					"item_code": "Test Item With Defaults",
 					"company": "_Test Company",
 					"price_list": "_Test Price List",
-					"currency": "_Test Currency",
+					"currency": "INR",
 					"doctype": "Sales Invoice",
 					"conversion_rate": 1,
-					"price_list_currency": "_Test Currency",
+					"price_list_currency": "INR",
 					"plc_conversion_rate": 1,
 					"customer": "_Test Customer",
 				}
@@ -362,10 +390,10 @@ class TestItem(ERPNextTestSuite):
 					"item_code": "Test Item With Defaults",
 					"company": "_Test Company",
 					"price_list": "_Test Price List",
-					"currency": "_Test Currency",
+					"currency": "INR",
 					"doctype": "Purchase Invoice",
 					"conversion_rate": 1,
-					"price_list_currency": "_Test Currency",
+					"price_list_currency": "INR",
 					"plc_conversion_rate": 1,
 					"supplier": "_Test Supplier",
 				}
